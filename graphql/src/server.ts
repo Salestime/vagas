@@ -1,6 +1,7 @@
-import { ApolloServer } from "apollo-server";
 import "reflect-metadata";
+import './utils/connection'
 import { buildSchema } from "type-graphql";
+import { ApolloServer } from "apollo-server";
 import UserResolver from "./graphql/users/UserResolver";
 
 async function bootstrap() {
