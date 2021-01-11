@@ -33,6 +33,22 @@ class UserResolver {
 
     return user;
   }
+
+  @Mutation(() => User)
+  async updateUser(
+    @Arg("_id") _id: string, 
+    @Arg("userInput") userInput: UserInput
+  ) {
+    const updatedUser = await UserSchema.findOneAndUpdate({ _id }, userInput, {
+      new: true,
+    });
+
+    if(!updatedUser) {
+      throw new Error('user not found');
+    }
+
+    return updatedUser;
+  }
 }
 
 export default UserResolver;
