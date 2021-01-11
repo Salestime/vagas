@@ -49,6 +49,19 @@ class UserResolver {
 
     return updatedUser;
   }
+
+  @Mutation(() => Boolean)
+  async deleteUser(@Arg("_id") _id: string) {
+    const user = await UserSchema.findOne({ _id })
+
+    if(!user) {
+      throw new Error('user not found');
+    }
+
+    await UserSchema.deleteOne({ _id });
+    
+    return true;
+  }
 }
 
 export default UserResolver;
