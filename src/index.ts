@@ -1,13 +1,13 @@
-import 'reflect-metadata';
-import { createConnection } from 'typeorm';
-import { ApolloServer } from 'apollo-server';
-import { buildSchema } from 'type-graphql';
+import 'reflect-metadata'; //to use decoratorsTS
+import { ApolloServer } from 'apollo-server'; //build and run graphQL server
+import { createConnection } from 'typeorm'; //connection database
+import { buildSchema } from 'type-graphql'; // to build the schema
 import { UserResolver } from './resolvers/user_resolver';
 
 
 
 async function runServer() {
-    const connection = await createConnection();
+    await createConnection()
     const schema = await buildSchema({
         resolvers: [UserResolver]
     });

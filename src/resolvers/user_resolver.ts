@@ -13,8 +13,14 @@ export class UserResolver {
   }
 
   @Query(() => User) 
-  getUser(@Arg("id") id:string) {
-    return User.findOne( { where: { id } } );
+  async getUser(@Arg("id") id:string) {
+    const user = await User.findOne( { where: { id } } );
+
+    if (!user) {
+      throw new Error(`The user with id: ${id} does not exists`);
+    }
+
+    return user;
   }
 
   @Mutation(() => User)
